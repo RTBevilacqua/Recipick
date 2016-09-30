@@ -39,18 +39,28 @@ function getRequest(cuisine){
 		key: '7c1222ed0547d19bb6062e98a4cba425',
 		q: cuisine
 	}
-	$.post()
+
+$.ajax({
+ dataType: "jsonp",
+ url: url,
+ data: parm,
+ }).done(function ( data ) {
+ console.log(data);
+})
+ .fail(function(data){
+ 	console.log(data);
+ })
 
 
-	$.ajax({
-	    url: url,
-	    data: parm,
-
-	    type: 'GET',
-	    success: function (data) {
-	        console.log(data);
-	    }
-	});
+	// $.ajax({
+	//     url: url,
+	//     data: parm,
+	//     type: 'GET',
+	//     crossDomain: true,
+	//     success: function (data) {
+	//         console.log(data);
+	//     }
+	// });
 	
 	// 	$.ajax({
 	// 	url: url,
@@ -65,6 +75,7 @@ function getRequest(cuisine){
 };
 
 function showResults(results){
+	console.log(results);
 	$('#food').hide();
 	$('#cuisine').hide();
 	$.each(results.recipes.title, function(i, value){
