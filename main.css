@@ -1,24 +1,144 @@
+
+
 body{
 	box-sizing: border-box;
-	max-width: 960px;
+	background: linear-gradient(#E0E0E0 , #D8D8D8);
+	font-family: 'baloo bhai', helvetica; 
+	max-width: 100%;
+	margin: 0 auto;
+}
+main{
+	max-width: 1300px;
+	margin: 0 auto;
+	/*background: linear-gradient(#FF611D, #FF5B3D);*/
+}
+
+section{
+	width: 98%;
+	margin: 0 auto;
 }
 
 h1{
 	text-align: center;
-	margin: 82px 0 0 0;
-    font-size: 4em;
+	margin: 0;
+    font-size: 5em;
+    letter-spacing: 11px;
+    background: #A6E4FF;
 }
 h2{
 	text-align: center;
 	margin-bottom: 40px;
-	font-size: 12.5px;
+	margin-top: 0;
+	font-size: 1.3em;
+	background: white;
+	padding: 5px 0;
+}
+h3{
+	font-size: 1.5em;
+    margin: 33px 0px;
+    width: 100%;
+    text-align: center;
+
+
 }
 div{
-    width: 149px;
-    height: 149px;
-    border: 1px solid black;
+	width: 150px;
+	height: 150px;
     display: inline-block;
-    margin: 17px;
+    margin: 40px 10%;
     border-radius: 100%;
     text-align: center;
+    background-color: white;
 }
+
+
+#cuisine div img{
+	width: 70%;
+	height: 70%;
+	position: relative;
+    top: 22px;	
+    border-radius: 0;
+}
+
+#food div img{
+	width: 70%;
+	height: 70%;
+	position: relative;
+    top: 21px;
+}
+
+
+#results div{
+	width: 150px;
+	height: 150px;
+    text-align: center;
+    border: 10px solid white;
+
+}
+
+#results div img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+
+
+}
+
+#results h3{
+	font-size: 1em;
+    margin: 0px 0px;
+    width: 165px;
+    text-align: center;
+}
+
+#recipe{
+	background-color: white;
+    margin: 23% auto;
+    width: 90%;
+    border-radius: 1%;
+    padding: 31px 0;
+    box-shadow: 1px 1px 10px 4px #D60000;
+}
+
+#recipe p{
+	padding: 0 10px;
+}
+
+@media(min-width: 580px){
+	#result div{
+		display: inline-block;
+		margin: 100px 5%;
+	} 
+}
+
+
+@media(min-width: 800px){
+	div{
+		margin: 20px 4%;
+	}
+	#cuisine div img{
+		top: 20px;
+	}
+	h1{
+		font-size: 10em;
+	}
+	h2{
+		text-align: center;
+		margin-bottom: 40px;
+		margin-top: 0;
+		font-size: 2.3em;
+		background: white;
+		padding: 18px 0;
+	}
+	h3{
+		margin-top: 32px;
+		position: relative;
+	}
+	#food div img{
+		top: 22px;
+	}
+
+}
+
+
+

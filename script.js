@@ -1,106 +1,96 @@
 'use strict'
 $(function(){
-	console.log('ready');
-	$('#cuisine').hide();
-	var result = [];
-
-//click on food icon
-$(document).on('click', 'div', function(e){
-	e.preventDefault();
-	var food = this.id;
-	//push clicked item into result
-	result.push(food);
-	// fade other icons out
-	$(this).siblings('div').fadeOut('slow');
-	//center icon at top
-	$(this).css({'display': 'block','margin':'0 auto'});
-	//load cuisine bellow icon
-	$('#cuisine').show();
-	console.log(food);
-	console.log(result);
-	if(result.length === 2){
-		getRequest(result.toString());
-	}
+	$('#food').hide();
+	$('#recipe').hide();
+	var recipick = {
+		cuisine: '',
+		food: ''
+	};
+	//choose cuisine and hides others.
+$('#cuisine div').on('click', function(){
+	recipick.cuisine = this.id;
+		$(this).siblings('div').fadeOut('slow');
+		$(this).css({'display': 'block','margin':'0 auto'});
+		$('#food').show();
+});
+//choose type of food and hides the rest.
+$('#food div').on('click', function(){
+	recipick.food = this.id;
+		$(this).siblings('div').fadeOut('slow');
+		$(this).css({'display': 'block','margin':'0 auto 10px'});
+		getCuisineTwo(recipick.cuisine, recipick.food);
+		$('#results').show();
+});
+//pick the results of cuisne and food and loads webpage with recipe.
+$('#results').on('click', 'div', function(){
+	console.log('yes');
 	
-
 });
 
 
-
-//once results has two search items the next window should bring up recipes 
-
-
-
 /*---------------GET JSON----------------*/
+//searches for food
 
-function getRequest(cuisine){
-	var url = 'http://food2fork.com/api/search';
-	var parm = {
-		key: '7c1222ed0547d19bb6062e98a4cba425',
-		q: cuisine
-	}
-
-$.ajax({
- dataType: "jsonp",
- url: url,
- data: parm,
- }).done(function ( data ) {
- console.log(data);
-})
- .fail(function(data){
- 	console.log(data);
- })
-
-
-	// $.ajax({
-	//     url: url,
-	//     data: parm,
-	//     type: 'GET',
-	//     crossDomain: true,
-	//     success: function (data) {
-	//         console.log(data);
-	//     }
-	// });
-	
-	// 	$.ajax({
-	// 	url: url,
-	// 	jsonpCallback: 'callback',
-	// 	dataType: "jsonp",//use jsonp to avoid cross origin issues
-	// 	type: "GET"
-	// })
-	// .done(function(result){ //this waits for the ajax to return with a succesful promise object
-	// 	//showResults(result);
-	// 	console.log(result.recipes);
-	// })
+function getCuisineTwo(cuisine, food) {
+	var url = 'https://api.yummly.com/v1/api/recipes?';
+	var param = {
+		"Content-Type": "application/json",
+		_app_id:'a4cc8d7f',
+		_app_key:'0403a1c7e83a3a6035369a42c9ccbbf5',
+		q: food,
+		"allowedCuisine[]":'cuisine^cuisine-' + cuisine,
+		requirePictures: 'true',
+		maxResults: '10',
+		hostedLargeUrl: 'large (360×240)'
+	};
+	//$.getJSON(url, param, showCuisine);
+	$.ajax({url: url,
+			data: param,
+			success: function(data){
+				//console.log(data);
+				showCuisine(data);
+				
+			var param = {
+					_app_id:'a4cc8d7f',
+					_app_key:'0403a1c7e83a3a6035369a42c9ccbbf5'
+					};
+				data.matches.forEach(function(v){
+					console.log(v.id);
+					var url = 'http://api.yummly.com/v1/api/recipe/' + v.id + '?_app_id='
+					+ param._app_id +'&_app_key=' + param._app_key;
+				$.getJSON(url, showRecipe);
+				console.log(v.source.sourceRecipeUrl);
+				})
+			}
+			});
 };
 
-function showResults(results){
-	console.log(results);
-	$('#food').hide();
+//gets recipe id 
+function showRecipe(data){
+	console.log(data);
+};
+
+
+//brings up recipes 
+function showCuisine(results){
+	//console.log(results);
+	$('#food').remove();
 	$('#cuisine').hide();
-	$.each(results.recipes.title, function(i, value){
-		//$('#results').append();
-		console.log(results);
-
-	});
-
-}
-
-
-
-
-
-
+	for(var i = 0; i < results.matches.length; i++){
+		var id = Object.keys(results.matches[i].imageUrlsBySize)[0];
+		var imageUrl = results.matches[i].imageUrlsBySize[id];
+		var recipeName = results.matches[i].recipeName;
+		if(recipeName.length > 18){
+			recipeName = recipeName.substr(0,17) + '...';
+		}
+		$('#results').append('<div><img src ="' + imageUrl  + '"><h3>' + recipeName + '</h3></div>');
+		var recipeId = results.matches[i].id;
+		//console.log(recipeId);
+	}
 
 
 
-
-
-
-
-
-
-
+ };
 
 
 
