@@ -58,7 +58,7 @@ function getCuisineTwo(cuisine, food) {
 				//gets recipe url and stores it in recipeUrl
 					data.matches.forEach(function(x){
 					
-					var url = 'http://api.yummly.com/v1/api/recipe/' + x.id + '?_app_id='
+					var url = 'https://api.yummly.com/v1/api/recipe/' + x.id + '?_app_id='
 					+ param._app_id +'&_app_key=' + param._app_key;
 				$.getJSON(url, showRecipe);
 				});
