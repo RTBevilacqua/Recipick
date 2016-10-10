@@ -43,7 +43,7 @@ function getCuisineTwo(cuisine, food) {
 		maxResults: '10',
 		hostedLargeUrl: 'large (360×240)'
 	};
-	$.getJSON(url, param, showCuisine);
+	//$.getJSON(url, param, showCuisine);
 	$.ajax({
 			url: url,
 			data: param,
@@ -55,9 +55,9 @@ function getCuisineTwo(cuisine, food) {
 					_app_key:'0403a1c7e83a3a6035369a42c9ccbbf5',
 					
 					};
-				
-				var getRecipeSite = data.matches.filter(function(x){
-					//console.log(x.id);
+				//gets recipe url and stores it in recipeUrl
+					data.matches.forEach(function(x){
+					
 					var url = 'http://api.yummly.com/v1/api/recipe/' + x.id + '?_app_id='
 					+ param._app_id +'&_app_key=' + param._app_key;
 				$.getJSON(url, showRecipe);
@@ -67,14 +67,9 @@ function getCuisineTwo(cuisine, food) {
 			});
 };
 
-var recipeUrl = [];
-//gets recipe url and stores it in recipeUrl
+
 function showRecipe(data){
-	recipeUrl.push(data.source.sourceRecipeUrl);
-	for(var i = 0; i < recipeUrl.length; i++){
-	//console.log(recipeUrl[i]);
-}
-	
+	$('#' + data.id).attr('href', data.source.sourceRecipeUrl);
 };
 
 //brings up recipes 
@@ -94,7 +89,7 @@ function showCuisine(results){
 			recipeName = recipeName.substr(0,17) + '...';
 		}
 		
-		$('#results').append('<div><a target="_blank" href="' + 'www.google.com' + '"><img src ="' + imageUrl  + '"><h3>' + recipeName + '</h3></a></div>');
+		$('#results').append('<div><a id="' + results.matches[i].id + '"target="_blank" href="' + 'www.google.com' + '"><img src ="' + imageUrl  + '"><h3>' + recipeName + '</h3></a></div>');
 	};
 
 
