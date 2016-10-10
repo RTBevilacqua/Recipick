@@ -74,8 +74,6 @@ function showRecipe(data){
 
 //brings up recipes 
 function showCuisine(results){
-	console.log(recipeUrl, 'recipeUrl');
-	console.log(recipeUrl[0], 'foo');
 	//hides previous divs
 	$('#food').remove();
 	$('#cuisine').hide();
