@@ -28,6 +28,18 @@ $('#food div').on('click', function(){
 		$('#results').show();
 	});
 
+//return user to home screen
+	$('#return-home').click(function(){
+	//hides previous options
+	$('#food').hide();
+	$('#recipe').hide();
+	//show home screen
+	$('#cuisine').show();
+
+
+
+})
+
 
 /*---------------GET JSON----------------*/
 //searches for food
@@ -40,7 +52,7 @@ function getCuisineTwo(cuisine, food) {
 		q: food,
 		"allowedCuisine[]":'cuisine^cuisine-' + cuisine,
 		requirePictures: 'true',
-		maxResults: '10',
+		maxResults: '8',
 		hostedLargeUrl: 'large (360×240)'
 	};
 	$.ajax({
@@ -76,7 +88,7 @@ function showCuisine(results){
 	$('#food').remove();
 	$('#cuisine').hide();
 	//loops through object to find recipe name and image
-	for(var i = 0; i < results.matches.length; i++){
+	for(var i = 0; i < 8; i++){
 		var id = Object.keys(results.matches[i].imageUrlsBySize)[0];
 		var imageUrl = results.matches[i].imageUrlsBySize[id];
 		var recipeName = results.matches[i].recipeName;
@@ -87,8 +99,8 @@ function showCuisine(results){
 		
 		$('#results').append('<div><a id="' + results.matches[i].id + '"target="_blank" href="' + 'www.google.com' + '"><img src ="' + imageUrl  + '"><h3>' + recipeName + '</h3></a></div>');
 	};
-
-
 };
+
+
 
 });//document.ready
