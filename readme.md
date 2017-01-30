@@ -1,14 +1,14 @@
 ReciPick is the first full app I have made that makes an AJAX call.
 
-I built ReciPick by using the Mobil First approach.
+I built ReciPick by using the Mobile First approach.
 
 The goal for this application is to allow the user to quickly pick what he/she wants to make instead of having to browse the internet.
 
 Technology used- HTML, CSS, JavaScript, jQuery.
 
-I am in the process of making the selected icons animated in the screen.
+I am in the process of making the selected icons animated in the screen and adding a return home button.
 
-Bellow is the wire frame and flow chart for the page along with some screenshots.
+Bellow is the wireframe and flow chart for the page along with some screenshots.
 
 To view the app, please <a href='https://rtbevilacqua.github.io/Recipick/'>click here</a>-
 
